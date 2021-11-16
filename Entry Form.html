@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+   <script src="Entry Form.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="form.css"> 
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <img src="https://image.shutterstock.com/image-vector/master-chef-illustration-design-vector-260nw-1246190719.jpg" alt="" width="200" height="150">
+        <a class="navbar-brand" href="#"> MENUS </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">HOME<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Entry Form.html">Entry Form</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Report.html"> Report </a>
+                </li>
+               
+            </ul>
+        </div>
+      </nav><br><br>
+    <form class="needs-validation" novalidate>
+       <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="validationTooltip01">Inward Bill No:</label>
+                <input type="number" class="form-control" id="BillNo" placeholder="">
+                <small id="smallBillNo" style="display: none;">Please Enter The Valid Number.</small>
+              </div>
+         <div class="col-md-6 mb-3">
+            <label for="validationTooltip01">inward_bill_date:</label>
+            <input type="Date" class="form-control" id="Date" placeholder="">
+            <small id="smallDate" style="display: none;">Please Enter The Valid Number.</small>
+          </div>
+        </div>
+       <div class="form-row">
+       <div class="col-md-6 mb-3">
+        <label for="validationTooltip01">Delivery Challan No:</label>
+        <input type="number" class="form-control" id="DCNo" placeholder="">
+        <small id="smallDCNo" style="display: none;">Please Enter The Valid Number.</small>
+       </div>
+       <div class="col-md-6 mb-3">
+        <label for="validationTooltip01">Delivery_challan_date:</label>
+        <input type="Date" class="form-control" id="Date1" placeholder="">
+        <small id="smallDate1" style="display: none;">Please Enter The Valid Number.</small>
+       </div>
+       </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="validationTooltip05"> total_no_of_items :</label>
+          <input type="text" class="form-control" id="Items" placeholder="">
+          <small id="smallItems" style="display: none;">Please Enter The Items.</small>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationTooltip05"> total_no_of_weights :</label>
+            <input type="radio" id="KG" name="fav_language" value="KG">
+            <label for="KG">KG</label>
+            <input type="radio" id="Gram" name="fav_language" value="Gram">
+            <label for="Gram">Gram</label><br>
+          <input type="text" class="form-control" id="Weights" placeholder="">
+          <small id="smallWeights" style="display: none;">Please Enter The Weights.</small>
+          </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <la,mkloitymbel for="validationTooltip05"> Amount :</label>
+          <input type="text" class="form-control" id="Amount" placeholder="">
+          <small id="smallAmount" style="display: none;">Please Enter The Amount.</small>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationTooltip05"> Supplier Firm Name :</label>
+          <input type="text" class="form-control" id="Firmname" placeholder="">
+          <small id="smallFirmname" style="display: none;">Please Enter The Firmname.</small>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="validationTooltip03">Supplier Address :</label>
+            <input type="text" class="form-control" id="address" placeholder="">
+            <small id="smalladdress" style="display: none;">Please Enter The Address.</small>
+           </div> 
+        <div class="col-md-6 mb-3">
+            <label for="validationTooltip04">PINCODE :</label>
+            <input maxlength="6" type="text" class="form-control" id="Pincode" placeholder="">
+            <small id="smallPincode" style="display: none;">pls enter the Pincode.</small>
+        </div>
+      </div> 
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="validationTooltip05">Supplier Contact NO:</label>
+            <input maxlength="10" type="text" class="form-control" id="mobile" placeholder="">
+            <small id="smallmobile" style="display: none;">pls enter the Mobile.</small>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationTooltip05"> Supplier Email :</label>
+          <input type="email" class="form-control" id="Email" placeholder="@gmail.com">
+          <small id="smallEmail" style="display: none;">pls enter the Email.</small>
+        </div>
+      </div>  
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="validationTooltip05">Supplier Contact Person:</label>
+          <input type="text" class="form-control" id="Name" placeholder="">
+          <small id="smallName" style="display: none;">pls enter the Name.</small>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationTooltip05"> Material Received By. :</label>
+          <input type="text" class="form-control" id="Person" placeholder="">
+        <small id="smallPerson" style="display: none;">pls enter the Name.</small>
+        </div>
+      </div>
+        <button type="button" class="btn btn-primary"  value="" onclick="putData()">submit</button> 
+        
+      </form>
+      
+      <!-- <table>
+        <thead>
+          <tr>
+            <th scope="col">inward bill no</th>
+            <th scope="col">inward bill date</th>
+            <th scope="col">bill amount</th>
+            <th scope="col">delivery challan no</th>
+            <th scope="col">delivery challan date</th>
+            <th scope="col">total no of items</th>
+            <th scope="col">total no of weights</th>
+            <th scope="col">supplier firm name</th>
+            <th scope="col">supplier address</th>
+            <th scope="col">supplier pincode</th>
+            <th scope="col">supplier contact no</th>
+            <th scope="col">supplier email</th>
+            <th scope="col">supplier contact person</th>
+            <th scope="col">material recieved by</th>
+          </tr>
+        </thead>
+          <tbody id="tData">
+
+          </tbody>
+    </table> -->
+
+    <style>
+      .navbar-brand{margin-left: 10%;}
+      .navbar-{margin-left: 10%;}
+      img{
+          display: inline-block;
+      }
+
+    footer{
+
+        margin-top: 15%;
+      }
+      </style> 
+    
+   <footer>
+      <h5> WEBSITE DESIGNED BY GOPI/ACCENDAS </h5>
+</footer>
+</body>
+</html>

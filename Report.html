@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <img src="https://www.seekpng.com/png/detail/208-2088206_report-icon-project-report.png" alt="" width="200" height="150">
+            <a class="navbar-brand" href="#"> MENUS </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">HOME<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Entry Form.html">Entry Form</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Report.html"> Report </a>
+                    </li>
+                   
+                </ul>
+            </div>
+          </nav><br><br>
+
+          <div class="form-row">
+                <div class="col-md-6 mb-3">
+                  <input type="radio" id="SearchByBillNo" onchange="changePlaceholderAsBillNo()" name="fav_language" value="">
+                  <label for="SearchByBillNo">Search By BillNo</label>
+                  <input type="radio" id="SearchBySupplierName" onchange="changePlaceholderAsSupplierName()" name="fav_language" value="">
+                  <label for="searchBySupplierName">Search By Supplier Name</label><br>
+                  <input type="radio" id="SearchByDCNo" onchange="changePlaceholderAsDCNo()" name="fav_language" value="">
+                  <label for="SearchByDCNo">Search By DCNo</label>
+                  <input type="radio" id="SearchByPincode" onchange="changePlaceholderAsPincode()" name="fav_language" value="">
+                  <label for="searchByPincode">Search By Supplier Pincode</label><br>
+                  <input type="radio" id="SearchBymobile" onchange="changePlaceholderAsMobile()" name="fav_language" value="">
+                  <label for="SearchBymobile">Search By Supplier Mobile</label><br>
+                  <input  id="SearchInput" class="form-control" placeholder="Please check any radio button above" type="text"><br>
+                  <button type="submit" onclick="searchBy()">Search</button>
+                  <small id="smallBillNo" style="display: none;">pls enter the Valid Number.</small>
+                </div>
+                
+          </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">inward bill no</th>
+                    <th scope="col">inward bill date</th>
+                    <th scope="col">bill amount</th>
+                    <th scope="col">delivery challan no</th>
+                    <th scope="col">delivery challan date</th>
+                    <th scope="col">total no of items</th>
+                    <th scope="col">total no of weights</th>
+                    <th scope="col">supplier firm name</th>
+                    <th scope="col">supplier address</th>
+                    <th scope="col">supplier pincode</th>
+                    <th scope="col">supplier contact no</th>
+                    <th scope="col">supplier email</th>
+                    <th scope="col">supplier contact person</th>
+                    <th scope="col">material recieved by</th>
+                  </tr>
+                </thead>
+                  <tbody id="tData">
+        
+                  </tbody>
+            </table>
+             
+              <!-- <script src="Report.js"></script> -->
+
+    <script>
+        const firebaseConfig = {
+        apiKey: "AIzaSyBm_ZriqGVtpi8dbjUY2tPwLrrK8TgSzlY",
+        authDomain: "gems-6ec50.firebaseapp.com",
+        projectId: "gems-6ec50",
+        storageBucket: "gems-6ec50.appspot.com",
+        messagingSenderId: "696389407711",
+        appId: "1:696389407711:web:39d55390ebfe8c7fe8ea6a",
+        measurementId: "G-8N11350729"
+      };
+      firebase.initializeApp(firebaseConfig)
+      var cloud = firebase.firestore();
+      getdata()
+      function getdata() {debugger
+
+cloud.collection("visitors").onSnapshot((querySnapshot) => {
+const items = [];
+querySnapshot.forEach((doc) => {
+  items.push(doc.data());
+});
+console.log(items)
+window.datahtml="";
+window.totalItems=items;
+var datahtml="";
+      items.forEach(e=>{
+         datahtml+="<tr>"+
+                "<td>"+e.inward_bill_no+"</td>"+ 
+                "<td>"+e.inward_bill_date+"</td>"+ 
+                "<td>"+e.bill_amount+"</td>"+ 
+                "<td>"+e.delivery_challan_no+"</td>"+ 
+                "<td>"+e.delivery_challan_date+"</td>"+ 
+                "<td>"+e.total_no_of_items+"</td>"+ 
+                "<td>"+e.total_no_of_weights+"</td>"+ 
+                "<td>"+e.supplier_firm_name+"</td>"+ 
+                "<td>"+e.supplier_address+"</td>"+ 
+                "<td>"+e.supplier_pincode+"</td>"+ 
+                "<td>"+e.supplier_contact_no+"</td>"+ 
+                "<td>"+e.supplier_email+"</td>"+ 
+                "<td>"+e.supplier_contact_person+"</td>"+ 
+                "<td>"+e.material_received_by+"</td>"+ 
+                "</tr>"
+})
+
+document.getElementById("tData").innerHTML=datahtml;
+
+});
+}
+function searchBy(){debugger
+var searchGetData=document.getElementById("SearchInput").value;
+console.log(searchGetData);
+var getWindowData=window.totalItems;
+if(document.getElementById("SearchByBillNo").checked){
+  var filteredData=getWindowData.filter(e=>e.inward_bill_no==searchGetData)
+
+}else if(document.getElementById("SearchBySupplierName").checked){
+  var filteredData=getWindowData.filter(e=>e.supplier_contact_person==searchGetData)
+
+}else if(document.getElementById("SearchByDCNo").checked){
+  var filteredData=getWindowData.filter(e=>e.delivery_challan_no==searchGetData)
+
+}else if(document.getElementById("SearchByPincode").checked){
+  var filteredData=getWindowData.filter(e=>e.supplier_pincode==searchGetData)
+
+}else if(document.getElementById("SearchBymobile").checked){
+  var filteredData=getWindowData.filter(e=>e.supplier_contact_no==searchGetData)
+
+}else {
+  console.log("Nothing is Checked")
+}
+datahtml="";
+filteredData.forEach(e=>{
+    datahtml+="<tr>"+
+                  "<td>"+e.inward_bill_no +"</td>"+
+                  "<td>"+e.inward_bill_date +"</td>"+
+                  "<td>"+e.bill_amount+"</td>"+
+                  "<td>"+e.delivery_challan_no+"</td>"+
+                  "<td>"+e.delivery_challan_date+"</td>"+
+                  "<td>"+e.total_no_of_items+"</td>"+
+                  "<td>"+e.total_no_of_weights+"</td>"+
+                  "<td>"+e.supplier_firm_name+"</td>"+
+                  "<td>"+e.supplier_address+"</td>"+
+                  "<td>"+e.supplier_pincode+"</td>"+
+                  "<td>"+e.supplier_contact_no+"</td>"+
+                  "<td>"+e.supplier_email+"</td>"+
+                  "<td>"+e.supplier_contact_person+"</td>"+
+                  "<td>"+e.material_received_by+"</td>"+
+                  "</tr>"
+    })
+
+    document.getElementById("tData").innerHTML=datahtml;
+    
+}
+
+function searchBySupplierName(){debugger
+var searchGetData=document.getElementById("Name").value;
+console.log(searchGetData);
+var getWindowData=window.totalItems;
+var filteredData=getWindowData.filter(e=>e.supplier_contact_person==searchGetData)
+datahtml="";
+filteredData.forEach(e=>{
+    datahtml+="<tr>"+
+                  "<td>"+e.inward_bill_no +"</td>"+
+                  "<td>"+e.inward_bill_date +"</td>"+
+                  "<td>"+e.bill_amount+"</td>"+
+                  "<td>"+e.delivery_challan_no+"</td>"+
+                  "<td>"+e.delivery_challan_date+"</td>"+
+                  "<td>"+e.total_no_of_items+"</td>"+
+                  "<td>"+e.total_no_of_weights+"</td>"+
+                  "<td>"+e.supplier_firm_name+"</td>"+
+                  "<td>"+e.supplier_address+"</td>"+
+                  "<td>"+e.supplier_pincode+"</td>"+
+                  "<td>"+e.supplier_contact_no+"</td>"+
+                  "<td>"+e.supplier_email+"</td>"+
+                  "<td>"+e.supplier_contact_person+"</td>"+
+                  "<td>"+e.material_received_by+"</td>"+
+                  "</tr>"
+    })
+  }
+    document.getElementById("tData").innerHTML=datahtml;
+    function SearchByDCNo(){debugger
+var searchGetData=document.getElementById("DCNo").value;
+console.log(searchGetData);
+var getWindowData=window.totalItems;
+var filteredData=getWindowData.filter(e=>e.delivery_challan_no==searchGetData)
+datahtml="";
+filteredData.forEach(e=>{
+    datahtml+="<tr>"+
+                  "<td>"+e.inward_bill_no +"</td>"+
+                  "<td>"+e.inward_bill_date +"</td>"+
+                  "<td>"+e.bill_amount+"</td>"+
+                  "<td>"+e.delivery_challan_no+"</td>"+
+                  "<td>"+e.delivery_challan_date+"</td>"+
+                  "<td>"+e.total_no_of_items+"</td>"+
+                  "<td>"+e.total_no_of_weights+"</td>"+
+                  "<td>"+e.supplier_firm_name+"</td>"+
+                  "<td>"+e.supplier_address+"</td>"+
+                  "<td>"+e.supplier_pincode+"</td>"+
+                  "<td>"+e.supplier_contact_no+"</td>"+
+                  "<td>"+e.supplier_email+"</td>"+
+                  "<td>"+e.supplier_contact_person+"</td>"+
+                  "<td>"+e.material_received_by+"</td>"+
+                  "</tr>"
+    })
+  }
+    document.getElementById("tData").innerHTML=datahtml;
+    function SearchByPincode(){debugger
+var searchGetData=document.getElementById("Pincode").value;
+console.log(searchGetData);
+var getWindowData=window.totalItems;
+var filteredData=getWindowData.filter(e=>e.supplier_pincode==searchGetData)
+datahtml="";
+filteredData.forEach(e=>{
+    datahtml+="<tr>"+
+                  "<td>"+e.inward_bill_no +"</td>"+
+                  "<td>"+e.inward_bill_date +"</td>"+
+                  "<td>"+e.bill_amount+"</td>"+
+                  "<td>"+e.delivery_challan_no+"</td>"+
+                  "<td>"+e.delivery_challan_date+"</td>"+
+                  "<td>"+e.total_no_of_items+"</td>"+
+                  "<td>"+e.total_no_of_weights+"</td>"+
+                  "<td>"+e.supplier_firm_name+"</td>"+
+                  "<td>"+e.supplier_address+"</td>"+
+                  "<td>"+e.supplier_pincode+"</td>"+
+                  "<td>"+e.supplier_contact_no+"</td>"+
+                  "<td>"+e.supplier_email+"</td>"+
+                  "<td>"+e.supplier_contact_person+"</td>"+
+                  "<td>"+e.material_received_by+"</td>"+
+                  "</tr>"
+    })
+  }
+    document.getElementById("tData").innerHTML=datahtml;
+    function SearchBymobile(){debugger
+var searchGetData=document.getElementById("mobile").value;
+console.log(searchGetData);
+var getWindowData=window.totalItems;
+var filteredData=getWindowData.filter(e=>e.supplier_contact_no==searchGetData)
+datahtml="";
+filteredData.forEach(e=>{
+    datahtml+="<tr>"+
+                  "<td>"+e.inward_bill_no +"</td>"+
+                  "<td>"+e.inward_bill_date +"</td>"+
+                  "<td>"+e.bill_amount+"</td>"+
+                  "<td>"+e.delivery_challan_no+"</td>"+
+                  "<td>"+e.delivery_challan_date+"</td>"+
+                  "<td>"+e.total_no_of_items+"</td>"+
+                  "<td>"+e.total_no_of_weights+"</td>"+
+                  "<td>"+e.supplier_firm_name+"</td>"+
+                  "<td>"+e.supplier_address+"</td>"+
+                  "<td>"+e.supplier_pincode+"</td>"+
+                  "<td>"+e.supplier_contact_no+"</td>"+
+                  "<td>"+e.supplier_email+"</td>"+
+                  "<td>"+e.supplier_contact_person+"</td>"+
+                  "<td>"+e.material_received_by+"</td>"+
+                  "</tr>"
+    })
+  
+    document.getElementById("tData").innerHTML=datahtml;
+    }
+    
+    
+//    window.valueForUpdateForm=filteredData;
+// //    document.getElementById("date").value=window.valueForUpdateForm[0].dc_date;
+//    document.getElementById("BillNo").value=window.valueForUpdateForm[0].inward_bill_no;
+//    document.getElementById("Date").value=window.valueForUpdateForm[0].inward_bill_date;
+//    document.getElementById("Amount").value=window.valueForUpdateForm[0].bill_amount;
+//    document.getElementById("DCNo").value=window.valueForUpdateForm[0].delivery_challan_no;
+//    document.getElementById("Date1").value=window.valueForUpdateForm[0].delivery_challan_date;
+//    document.getElementById("Items").value=window.valueForUpdateForm[0].total_no_of_items;
+//    document.getElementById("Weights").value=window.valueForUpdateForm[0].total_no_of_weights;
+//    document.getElementById("Firmname").value=window.valueForUpdateForm[0].supplier_firm_name;
+//    document.getElementById("address").value=window.valueForUpdateForm[0].supplier_address;
+//    document.getElementById("Pincode").value=window.valueForUpdateForm[0].supplier_pincode;
+//    document.getElementById("mobile").value=window.valueForUpdateForm[0].supplier_contact_no;
+//    document.getElementById("Email").value=window.valueForUpdateForm[0].supplier_email;
+//    document.getElementById("Name").value=window.valueForUpdateForm[0].supplier_contact_person;
+//    document.getElementById("Person").value=window.valueForUpdateForm[0].material_received_by;
+//    window.inwardBillNumber=window.valueForUpdateForm[0].Inward_bill_no;
+
+
+// function updateData(){
+//     // inward bil no
+//     debugger
+
+
+
+//         // var date=document.getElementById("inward-date").value;
+//         var billAmount=document.getElementById("bill-amount").value;
+//         var dcNo=document.getElementById("chalan-no").value;
+//         var dcDate=document.getElementById("chalan-date").value;
+//         var dcDate=document.getElementById("weight").value;
+//         var noItems=document.getElementById("no_items").value;
+//         var supplierFirm=document.getElementById("supplier_firm").value;
+//         var supplierAddress=document.getElementById("supplier_address").value;
+//         var supplierPincode=document.getElementById("supplier_pin").value;
+//         var supplierNo=document.getElementById("supplier_no").value;
+//         var supplierEmail=document.getElementById("supplier_email").value;
+//         var supplierContactPerson=document.getElementById("supplier_contact").value;
+//         var materialReceivedBy=document.getElementById("material_received").value;
+
+
+//         debugger
+//         var supplierDetails={
+//             "Inward_bill_no":window.inwardBillNumber,
+//             "date":date,
+//             "bill_amount":billAmount,
+//             "dc_no":dcNo,
+//             "dc_date":dcDate,
+//             "no_items":noItems,
+//             "weight":weight,
+//             "supplier_no":supplierNo,
+//             "supplier_firm":supplierFirm,
+//             "supplier_email":supplierEmail,
+//             "supplier_address":supplierAddress,
+//             "supplier_pincode":supplierPincode,
+//             "supplier_contact_person":supplierContactPerson,
+//             "material_received":materialReceivedBy
+
+
+//         }
+
+//         cloud.collection("supplier").add(supplierDetails)
+
+
+// };
+function changePlaceholderAsBillNo(){
+  document.getElementById("SearchInput").placeholder = "Enter your Bill No"
+}
+function changePlaceholderAsSupplierName(){
+  document.getElementById("SearchInput").placeholder = "Enter Supplier Name"
+}
+function changePlaceholderAsDCNo(){
+  document.getElementById("SearchInput").placeholder = "Enter DCNo"
+}
+function changePlaceholderAsPincode(){
+  document.getElementById("SearchInput").placeholder = "Enter Pincode"
+}
+function changePlaceholderAsMobile(){
+  document.getElementById("SearchInput").placeholder = "Enter Supplier Mobile"
+}
+</script>
+<style>
+  .navbar-brand{margin-left: 20%;}
+  .navbar-{margin-left: 10%;}
+  img{
+      display: inline-block;
+  }
+
+footer{
+
+    margin-top: 15%;
+  }
+</style> 
+</body>
+</html>  
